@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Speculation Rules Test</title>
+
+</head>
+<body>
+  <a href="./next.html" id="next-link"><h1>Main Page</h1></a>
+
+
+
+
+  <script type="text/javascript"> 
+
+  if (
+
+    HTMLScriptElement.supports &&
+
+    HTMLScriptElement.supports("speculationrules")
+
+  ) {
+
+    const specScript = document.createElement("script");
+
+    specScript.type = "speculationrules";
+
+    const specRules = {
+
+      prefetch: [
+
+        {
+
+          urls: ['./next.html'],
+
+        },
+
+      ],
+
+    };
+
+    specScript.textContent = JSON.stringify(specRules);
+
+    document.body.append(specScript);
+
+  } else {
+
+    const linkElem = document.createElement("link");
+
+    linkElem.rel = "prefetch";
+
+    linkElem.href = "./next.html";
+
+    document.head.append(linkElem);
+
+  }
+
+  </script>
+  <script type="speculationrules">
+    {
+      "prefetch": [{ "urls": ["./next.html"] }]
+    }
+  </script>
+  <a href="./next.html" id="next-link">Go to Next Page</a>
+</body>
+</html>
